@@ -1,9 +1,10 @@
 import React from 'react'
 
-const List = () => {
+const List = ({todos}) => {
+    const todoList = todos.map( todo => <li>{todo}</li>)
     return (
         <ul>
-            <li>공부하자제발</li>
+            {todoList}
         </ul>
     )
 }
