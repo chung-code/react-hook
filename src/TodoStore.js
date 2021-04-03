@@ -3,9 +3,11 @@ import './App.css';
 import List from './List.jsx';
 import useFetch from './useFetch.js';
 import Header from './Header.jsx';
+import Form from './Form.jsx';
 
+export const TodoContext = React.createContext();
 
-const App = () => {
+const TodoStore = () => {
   const [todos, setTodos] = useState([]);
   const [newTodo, setNewTodo] = useState();
 
@@ -37,17 +39,14 @@ const App = () => {
   },[todos]) //렌더링 시점을 명시하기 위한 관찰할 state 지정
 
   return (
-    <>
-    <Header todos={todos}/>
+    <TodoContext.Provider value={{todos, addTodo, changeInputData, loading, changeTodoStatus}}>
+      <Header />
 
-    <form action="">
-      <input type="text" name="" onChange={changeInputData}/>
-      <button onClick={addTodo}>할일추가</button>
-    </form>
+      <Form />
 
-    <List todos={todos} loading={loading} changeTodoStatus={changeTodoStatus}/>
-    </>
+      <List />
+    </TodoContext.Provider>
   )
 }
 
-export default App;
+export default TodoStore;
